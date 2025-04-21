@@ -13,7 +13,16 @@ public class SteamEngine extends Engine {
     }
     @Override
     public void start() {
-        if (fuelLevel > 0 && ( requiredFuelType == fuelType.WOOD || requiredFuelType == fuelType.COAL )) {
+
+        if(fuelLevel > 0 ){
+            running = true;
+        }else {
+
+            throw new IllegalStateException("there is no fuel.");
+
+        }
+
+        if ( requiredFuelType == fuelType.WOOD || requiredFuelType == fuelType.COAL ) {
             running = true;
         } else {
             throw new IllegalStateException("Not able to start engine.");
