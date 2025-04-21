@@ -21,14 +21,14 @@ public class SteamEngineTest {
 
 
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void testCostPerBatchWithoutFuel() {
         SteamEngine engine = new SteamEngine(FuelType.WOOD);
         WidgetMachine widgetMachine = new  WidgetMachine(engine);
         engine.fill(FuelType.WOOD , 0);
 
         double expectedCost = 8.7;  // 2 batches * £4.35 per batch
-        double actualCost = widgetMachine.produce(16);
+        double actualCost = widgetMachine.produceWidgets(16);
         Assert.assertEquals(expectedCost, actualCost , delta);
     }
 
@@ -36,8 +36,10 @@ public class SteamEngineTest {
     public void testCalculateProductionCostThreeBatch() {
         SteamEngine engine = new SteamEngine(FuelType.WOOD);
         WidgetMachine widgetMachine = new  WidgetMachine(engine);
+        engine.fill(FuelType.WOOD , 1);
+
         double expectedCost = 13.05;  // 3 batches * £4.35 per batch
-        double actualCost = widgetMachine.produce(24);
+        double actualCost = widgetMachine.produceWidgets(24);
         Assert.assertEquals(expectedCost, actualCost , delta);
     }
 
@@ -45,8 +47,10 @@ public class SteamEngineTest {
     public void testCalculateProductionCostFourBatch() {
         SteamEngine engine = new SteamEngine(FuelType.WOOD);
         WidgetMachine widgetMachine = new  WidgetMachine(engine);
+        engine.fill(FuelType.WOOD , 1);
+
         double expectedCost = 17.4;  // 4 batches * £4.35 per batch
-        double actualCost = widgetMachine.produce(32);
+        double actualCost = widgetMachine.produceWidgets(32);
         Assert.assertEquals(expectedCost, actualCost , delta);
     }
 
